@@ -1,0 +1,165 @@
+GitHub:-  
+#########
+
+
+###############
+What is GitHub?
+###############
+GitHub is a web-based platform that is used to store, manage, and share source code using the Git version control system. It allows developers to upload their code into repositories, track changes made by different team members, and collaborate efficiently on the same project. GitHub provides features like branching, merging, pull requests, and issue tracking, which help in managing development work, reviewing code, and fixing bugs in an organized way. It is widely used in software development to maintain code history, support team collaboration, and ensure smooth project version control.
+
+
+
+
+################################
+Difference Between Git & GitHub?
+################################
+Git is a distributed version control system that is used to track changes in source code, manage different versions, and allow developers to work on a project locally without needing an internet connection. GitHub is a web-based platform that uses Git and provides a central place to store Git repositories online, enabling team collaboration, code sharing, and project management through features like pull requests, code reviews, and issue tracking. Git focuses on version control at the local level, while GitHub focuses on collaboration and repository hosting at the central level.
+
+
+
+
+
+######################
+Why we require GitHub?
+######################
+GitHub is required to store code in a central and secure place where multiple developers can access and work on the same project. It helps teams collaborate easily by allowing code sharing, version tracking, and reviewing changes through pull requests. GitHub also maintains complete code history, helps in managing bugs and tasks using issues, and supports smooth integration with tools for testing and deployment, which makes development faster, more organized, and more reliable.
+
+
+
+
+
+###################################
+What is the architecture of GitHub?
+###################################
+WorkingDirectory-->status-->add-->staging-->commit-->LocalRepository-->push-->CentralRepoitory
+
+
+
+
+
+######################################################
+How do you know what work your team members are doing?
+######################################################
+I know what work my team members are doing by using GitHub features like repositories, branches, commits, and pull requests. Each developer works on a separate branch and their commits clearly show when and what changes they have made . Pull requests help in reviewing their work, understanding the code changes, and tracking progress. GitHub issues and comments also provide visibility into assigned tasks, ongoing work, and completed features, which helps the team stay aligned.
+
+
+
+
+
+##########################
+What is working directory?
+##########################
+The working directory is the local folder on a developer’s system where the project files are stored and actively modified. It contains the current version of the code that a developer is working on, and any changes made in this directory are not tracked by Git until they are added to the staging area. The working directory allows developers to edit, test, and review code before committing it to the Git repository.
+
+
+
+
+
+#################
+What is staging ?
+#################
+Staging is an activity where I am selecting only those files which I want to take it as a backup for us is called as Staging.
+
+Staging is the intermediate area in Git where selected changes from the working directory are prepared before committing them to the repository. It allows developers to choose which files or changes should be included in the next commit, helping to organize and control code updates. By using the staging area, developers can review and verify changes before permanently saving them in the Git version history.
+
+
+
+
+
+############### 
+Git Commands :-
+############### 
+git init -- it will help us to create a local repository
+git status -- it help us to show unstaged files 
+git add -- it help us to add the files in the staging area
+git commit -- it help us to store a file into local repository
+git push -- it help us to push our file from local repository to central repository
+git clone -- it is used first time when we are adding a project in a local repository. 
+git pull -- used to fetch the latest changes from a remote repository and automatically merge them into the current local branch.
+
+
+
+
+
+##################
+What is branches ?
+##################
+It allows developers to work on new features, bug fixes, or changes independently without affecting the main codebase. Each branch contains its own set of commits and points to a specific version of the code, making it easy to develop, test, and modify features in isolation. Once the work on a branch is completed and reviewed, it can be merged back into the main branch, which helps teams manage parallel development safely and keep the code stable.
+
+
+
+
+
+#########################################
+How many branches you created at a time ?
+#########################################
+I handled maximum two branches at a time 
+I generally handle 1 active branch which can be like feature branch, bug-fix branch, and sometimes I work parallelly with a hotfix branch.
+
+
+
+
+
+###############################################  
+How many types of branches you have worked on ?
+###############################################
+main branch, Dev branch, Bug fixing branch, Hot Fix branch , R&D branch, Change Request branch, Versioning branch.
+
+
+
+
+
+################################################################
+if a task is allocated how would you start working on that task?
+################################################################
+Firstly we should clone the project we will create a branch once my task is completed on that particular branch I will inform my team lead then my TL will review that if the changes are done by me if it is appropriate then it will merge that code in required branch
+
+
+
+
+
+###########################################
+Why do you create a branch in your project?
+###########################################
+I create a branch in my project to work on new features, bug fixes, or changes independently without affecting the production code. Branching allows me to develop and test my changes safely while the main branch remains stable for other team members. Once the work is completed and reviewed, the branch can be merged back.
+
+
+
+
+
+#####################################################################################
+Can you give me the practical scenario what need to create a branch in your project ?
+#####################################################################################
+if I am working on a live application and the client asks for a new feature like adding a payment option, I create a separate feature branch from the develop branch to implement that change. This allows me to write, test, and commit code without disturbing the production code used by other team members.
+
+
+
+
+
+
+######################
+What is git conflict ?
+######################
+
+###########################################
+What is Merge conflict and when it occurs ?
+###########################################
+
+#######################
+What is Pull conflict ?
+#######################
+
+########################
+what is HOT-FIX branch ?
+########################
+Production level defects when we were said to be fixed we will create a separate branch for it called as Hotfix. because they are highest priority bugs
+
+
+
+
+
+
+
+
+the  process of finding all the files in the working directory is called as Status--> selecting the necessary files is called as add--> when we run add command we are selecting the required files so we are doing Staging.
+
