@@ -1,0 +1,64 @@
+Debugging 
+
+What is Red dot ?
+Red dot is a Break Point to stop the Debugging.
+
+What is Debugging ?
+Debugging will help us to identify that exact part of your code where the problem occurs.
+it also help us to understand the flow of our code.
+
+
+What is Stepover ?
+step over will help us to move from current line to the next line only in same method.
+
+
+During Debugging How do i go to that method?
+Step into. is used to go to inside the method which is called.
+
+
+What is Step Out ?
+Step out is used to come out from that method and goes to from where it is called.
+
+
+What is Resume program ?
+it is used to execute the complete program.
+
+
+What is Evaluate Expression?
+Evaluate Expression will tell what this method is returning without even going to that method and checking.
+this feature has only IntelliJ .
+
+
+What is Quick fix ?
+Quick fix is used to fix the bug or warning automatically.
+
+IMPORTANT shortcut key FEATURES 
+
+ALT + 6  is used to show the warnings.
+ctrl + B is used to find out the method or variable where it is declared .
+ctrl + F12 that will give you all the content like variables methods constructors means everything .
+
+
+
+How do we debug an API ?
+VIEW >> TOOLS WINDOW >> ENDPOINTS .. then paste URL and double click and directly open that method . 
+then put a break point and line by line evaluate a expression 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
