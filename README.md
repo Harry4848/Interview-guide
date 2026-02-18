@@ -1,2 +1,279 @@
 # Interview-guide
 Java Backend Development
+kafka
+
+
+Apache Kafka :-
+###############
+
+
+########################################
+What is Apache Kafka and why is it used?
+########################################
+Apache Kafka is a distributed event-streaming platform used to build real-time data pipelines and streaming applications. It is designed to publish, store, and process large volumes of data in the form of events or messages with very high throughput and low latency. Kafka is used because it can handle massive data streams reliably, scale horizontally across multiple servers, and ensure fault tolerance by replicating data. It allows different systems to communicate asynchronously, decouples producers and consumers.
+
+
+
+
+###########################
+Explain Kafka architecture?
+###########################
+Kafka architecture consists of producers, brokers, topics, partitions, and consumers. where
+Producers send data to topics. then
+Topics store data and are split into partitions. then
+Brokers store and manage the data.
+Consumers read data from topics.
+
+
+
+
+################################################
+What is a Topic, Partition, and Offset in Kafka?
+################################################
+A topic is a category where Kafka stores messages.
+A partition is a part of a topic that stores messages in order.
+An offset is the unique number that identifies each message in a partition.
+
+A topic is a logical channel used to store and organize messages sent by producers. Each topic is divided into partitions, which are physical segments of the topic that allow Kafka to scale and process data in parallel across multiple brokers. Messages inside a partition are stored in a strict sequential order. An offset is a unique sequential number assigned to each message within a partition, which represents the position of that message. Offsets are used by consumers to track which messages have been read, enabling reliable message consumption and replay of data when required.
+
+
+
+
+##############################################
+What is a Kafka Producer and how does it work?
+##############################################
+A Kafka producer is an application that sends data to Kafka topics.
+It works by creating messages and sending them to a topic. Kafka then stores these messages in partitions for processing.
+
+
+
+
+##############################################
+What is a Kafka Consumer and how does it work?
+##############################################
+A Kafka consumer is an application that reads data from Kafka topics.
+It works by subscribing to a topic and reading messages from partitions using offsets.
+
+
+
+
+##################################
+What is a Consumer Group in Kafka?
+##################################
+A consumer group in Kafka is a group of consumers that work together to read data from one or more topics. Each partition of a topic is assigned to only one consumer within the group, which ensures that messages are processed only once by the group while allowing parallel processing. Consumer groups help achieve scalability, fault tolerance, and efficient load balancing in message consumption
+
+
+
+
+#######################################
+How does Kafka ensure message ordering?
+#######################################
+Kafka ensures message ordering at the partition level. Messages sent to the same partition are written and stored in the exact order in which they are produced, and consumers read them sequentially using offsets. As long as a consumer reads from a single partition, the order of messages is always preserved. Kafka does not guarantee ordering across multiple partitions of a topic, so to maintain strict ordering, messages that must be processed in order are sent to the same partition, usually by using a consistent message key.
+
+
+
+
+#####################################################################
+What is the role of ZooKeeper in Kafka? (or KRaft in latest versions)
+#####################################################################
+ZooKeeper was used to keep track of the cluster state and ensure consistency across brokers, while KRaft replaces ZooKeeper by embedding this functionality directly into Kafka. KRaft simplifies the architecture, improves performance, and makes Kafka easier to manage by handling controller operations, metadata storage, and fault tolerance internally without relying on an external system.
+
+
+
+
+#############################################
+What is Replication and what is ISR in Kafka?
+#############################################
+Replication in Kafka is the process of copying partition data across multiple brokers. Each partition has one leader replica that handles all read and write requests and multiple follower replicas that replicate the data from the leader.
+ISR, or In-Sync Replicas, is the set of replicas that are fully caught up with the leader and have the latest data. when replicas in the ISR have successfully replicated the data, which helps prevent data loss during broker failures.
+
+
+
+
+###########################################
+What happens when a Kafka broker goes down?
+###########################################
+When a Kafka broker goes down, Kafka automatically handles the situation without stopping the system. If that broker was the leader for any partition, Kafka selects another broker from the in-sync replicas and makes it the new leader. Producers and consumers then start communicating with the new leader automatically. The remaining brokers continue working normally, so there is no data loss or downtime. When the failed broker comes back up, it syncs the latest data and joins the cluster again as a follower.
+
+
+
+
+###############################################################
+What is at-least-once, at-most-once, and exactly-once delivery?
+###############################################################
+At-least-once delivery means a message is delivered one or more times, so there is a chance of duplicate messages but no data is lost.
+At-most-once delivery means a message is delivered only once or not delivered at all, so duplicates do not occur but messages can be lost.
+Exactly-once delivery means a message is delivered only once and is not lost or duplicated.
+
+
+
+
+#######################################
+How does Kafka achieve high throughput?
+#######################################
+Kafka achieves high throughput by writing data sequentially to disk and using a distributed, partition-based architecture that allows parallel processing across multiple brokers. It uses batching to send and read multiple messages together, which reduces network overhead
+
+
+
+
+#####################################################
+What is Kafka Commit and how offset management works?
+#####################################################
+A Kafka commit is the process of saving the offset of the last message that a consumer has successfully processed. Offset management works by tracking these offsets so Kafka knows where the consumer should continue reading if it restarts or fails. Offsets can be committed automatically at regular intervals or manually after processing the messages, depending on the configuration. Kafka stores committed offsets in an internal topic, which allows reliable message processing and ensures consumers do not reprocess messages unnecessarily or miss any data.
+
+
+
+
+###########################################################################
+Difference between Kafka and traditional messaging systems (like RabbitMQ)?
+###########################################################################
+Kafka is designed for high-speed, large-scale data streaming and stores messages on disk,
+Kafka handles real-time data pipelines;
+
+while traditional systems like RabbitMQ focus on message delivery and delete messages once consumed.
+RabbitMQ is better for task-based messaging.
+
+
+
+
+#######################################################
+What are real-time use cases of Kafka in microservices?
+#######################################################
+In my AgriShop project, Kafka is used for real-time communication between microservices to handle high-volume and event-driven operations. For example, when a farmer places an order for seeds or fertilizers, an order event is published to a Kafka topic. The inventory service consumes this event to update stock in real time, the payment service processes payment, and the notification service sends order confirmation messages. Kafka is also used to stream real-time data for price updates, order status tracking, and audit logs.
+
+
+
+
+---
+
+
+##################################################
+Can Kafka guarantee exactly-once message delivery?
+##################################################
+Yes, Kafka can guarantee exactly-once delivery when you enable **idempotent producers** and use **transactions**.
+
+
+
+
+##########################################################################################
+What happens if a consumer fails after reading a message but before committing the offset?
+##########################################################################################
+If a consumer fails after reading a message but before committing the offset, Kafka will **re-deliver that message** when the consumer restarts.
+
+
+
+
+################################################################
+Can multiple consumers read the same partition at the same time?
+################################################################
+No, only **one consumer in a group** can read a partition at a time. Others read from different partitions.
+
+
+
+
+##########################################################################
+How does Kafka handle message ordering when there are multiple partitions?
+##########################################################################
+Kafka **guarantees order only within a partition**.
+Across multiple partitions, there is **no guaranteed order**.
+
+
+
+
+#########################################################################
+What happens if the producer sends messages faster than Kafka can handle?
+#########################################################################
+If the producer sends messages too fast, Kafka **stores them in a buffer**.
+If the buffer fills, the producer may **wait or get an error** depending on its settings.
+
+
+
+
+################################################################
+What is the difference between log compaction and log retention?
+################################################################
+* **Log Retention:** Deletes old messages after a configured time or size.
+* **Log Compaction:** Keeps the latest message for each key, removing older duplicates.
+
+
+
+
+##################################
+What happens if ISR becomes empty?
+##################################
+If ISR becomes empty, the partition **cannot accept writes** until at least one replica rejoins the ISR.
+
+
+
+
+########################################################################
+How does Kafka rebalance consumer groups and what problems can it cause?
+########################################################################
+Kafka **rebalances** by redistributing partitions among consumers when a consumer joins, leaves, or fails.
+It can cause **temporary unavailability** and **duplicate processing** during the rebalance.
+
+
+
+
+##########################################################################
+What is the difference between synchronous and asynchronous producer send?
+##########################################################################
+* **Synchronous send:** Producer waits for **acknowledgment** from Kafka before continuing.
+* **Asynchronous send:** Producer **sends and continues** without waiting for acknowledgment.
+
+
+
+
+##########################################################################
+What happens when a Kafka broker that is leader for a partition goes down?
+##########################################################################
+When a leader broker goes down, Kafka **elects a new leader** from the ISR and clients start sending/reading messages from the **new leader**.
+
+
+
+
+###############################
+How does Kafka avoid data loss?
+###############################
+Kafka avoids data loss by:
+
+* **Replication:** Each partition has multiple replicas.
+* **ISR tracking:** Writes go to all in-sync replicas.
+* **Acknowledgments:** Producer can wait for **acks from replicas** before considering a write successful.
+
+
+
+
+#################################
+Can Kafka work without ZooKeeper?
+#################################
+Yes, Kafka **can work without ZooKeeper** starting from **Kafka 2.8+**, using **KRaft mode** for metadata management.
+
+
+
+
+
+############################################################
+What happens if auto-commit is enabled and consumer crashes?
+############################################################
+If auto-commit is enabled and the consumer crashes, **some messages may be lost or processed twice**, because offsets might be committed **before processing completes**.
+
+
+
+
+###########################################
+Why is Kafka pull-based and not push-based?
+###########################################
+Kafka is **pull-based** so consumers can **control their own read rate**, avoid being overwhelmed, and **replay messages** at any time.
+Push-based can overwhelm consumers if producers send faster than they can process, and it cannot easily support replaying messages. that's why.
+
+
+
+
+################################################
+Can Kafka be used as a database? Why or why not?
+################################################
+No, Kafka is **not a database**. It’s a **messaging system** for streaming data:
+
+* It **doesn’t support complex queries or transactions** like a DB.
+* It’s designed for **high-throughput, append-only logs**, not random reads/writes.
